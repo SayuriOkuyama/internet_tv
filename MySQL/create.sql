@@ -26,7 +26,7 @@ CREATE TABLE episodes (
     episode_no INTEGER,
     episode_name VARCHAR(100) NOT NULL UNIQUE KEY,
     episode_detail VARCHAR(500) NOT NULL,
-    video_length VARCHAR(20) NOT NULL,
+    video_length TIME NOT NULL,
     publication_at DATE NOT NULL,
     viewers INTEGER NOT NULL DEFAULT 0,
     PRIMARY KEY (episode_index),
