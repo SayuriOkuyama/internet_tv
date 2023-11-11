@@ -35,6 +35,7 @@
     | video_length | TIME |  | 〇 |  |  |
     | publication_at | DATE |  | 〇 |  |  |
     | viewers | INTEGER |  | 〇 | 0 |  |
+    
     UNIQUE KEY (program_no, season_no, episode_no),
     FOREIGN KEY (program_no) REFERENCES programs(program_no)
 
@@ -44,6 +45,7 @@
     | --- | --- | --- | --- | --- | --- |
     | program_no | INTEGER |  | 〇 |  |  |
     | genre_no | INTEGER |  | 〇 |  |  |
+
     PRIMARY KEY (program_no, genre_no),
     FOREIGN KEY (program_no) REFERENCES programs(program_no),
     FOREIGN KEY (genre_no) REFERENCES genres(genre_no)
@@ -55,6 +57,7 @@
     | cannel_no | INTEGER |  | 〇 |  |  |
     | broadcasting_at | DATETIME |  | 〇 |  |  |
     | episode_index | INTEGER |  | 〇 |  |  |
+
     PRIMARY KEY (channel_no, broadcasting_at),
     FOREIGN KEY (channel_no) REFERENCES channels(channel_no),
     FOREIGN KEY (episode_index) REFERENCES episodes(episode_index)
