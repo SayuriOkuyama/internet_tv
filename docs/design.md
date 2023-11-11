@@ -14,7 +14,6 @@
     CREATE DATABASE internet_tv;
     ```
 
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/e7d6ef01-ad29-47c5-92a3-7d3504f517ae/ad3da55e-c726-4fa8-bf76-a917c93f7f3a/Untitled.png)
 
 2. データベースができていることを確認する。
     
@@ -22,4 +21,3 @@
     SHOW DATABASES;
     ```
     
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/e7d6ef01-ad29-47c5-92a3-7d3504f517ae/950a6d84-2df7-4346-9dd2-95c710baacc4/Untitled.png)
