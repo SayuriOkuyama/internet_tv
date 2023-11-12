@@ -90,6 +90,7 @@ LIMIT 2
 ## 6.ジャンルごとの番組の視聴数ランキングを知りたい
 番組の視聴数ランキングはエピソードの平均視聴数ランキングとする。
 ジャンルごとに視聴数トップの番組に対して、ジャンル名、番組タイトル、エピソード平均視聴数を取得する。
+### クエリ
 ```sql
 SELECT
 	g1.genre_name AS "ジャンル名",
@@ -107,35 +108,34 @@ GROUP BY
 	g1.genre_name, p1.program_name
 HAVING
 	AVG(e1.viewers) = ( SELECT
-							MAX(e_sub.avg_viewers)
-						FROM
-							program_genres AS pg2
-								INNER JOIN episodes AS e2
-									ON pg2.program_no = e2.program_no
-								INNER JOIN programs AS p2
-									ON p2.program_no = e2.program_no
-								INNER JOIN genres AS g2
-									ON g2.program_no = e2.program_no
-								INNER JOIN (
-										SELECT
-											e3.program_no,
-											AVG(e3.viewers) AS avg_viewers
-										FROM
-											episodes AS e3
-										GROUP BY
-											e3.program_no
-										) AS e_sub
-									ON e2.program_no = e_sub.program_no
-						WHERE
-							g1.genre_name = g2.genre_name
-						)
+				MAX(e_sub.avg_viewers)
+			FROM
+				program_genres AS pg2
+					INNER JOIN episodes AS e2
+						ON pg2.program_no = e2.program_no
+					INNER JOIN programs AS p2
+						ON p2.program_no = e2.program_no
+					INNER JOIN genres AS g2
+						ON g2.program_no = e2.program_no
+					INNER JOIN (
+							SELECT
+								e3.program_no,
+								AVG(e3.viewers) AS avg_viewers
+							FROM
+								episodes AS e3
+							GROUP BY
+								e3.program_no
+							) AS e_sub
+						ON e2.program_no = e_sub.program_no
+			WHERE
+				g1.genre_name = g2.genre_name
+			)
 ;
 ```
 
-結果
-+--------------------------+---------------------------------------+-------------------------------+
+### 結果
 | ジャンル名               | 番組タイトル                            | エピソード平均視聴数             |
-+--------------------------+--------------------------------------+--------------------------------+
+|--------------------------|--------------------------------------|--------------------------------|
 | ドラマ                   | ドラマ「シェフの花園」                  |                    115000.0000 |
 | 料理                     | ドラマ「シェフの花園」                  |                    115000.0000 |
 | 音楽                     | 音楽ライブ「響きの探求者」              |                    550000.0000 |
@@ -146,5 +146,5 @@ HAVING
 | アニメ                   | ファンタジーアニメ「冒険者たちの物語」    |                    107500.0000 |
 | スポーツ                 | サッカー中継「ワールドカップ特集」        |                    125000.0000 |
 | 映画                     | 映画「感動の物語」                      |                    102500.0000 |
-+--------------------------+---------------------------------------+--------------------------------+
+
 10 rows in set (0.01 sec)
